@@ -1,0 +1,72 @@
+:root {
+  --color-primary: #2584ff;
+  --color-secondary: #00d9ff;
+  --color-accent: #ff3400;
+  --color-heading: #1b0760;
+  --color-body: #918ca4;
+  --color-body-darker: #5c5577;
+  --color-border: #ccc;
+
+  --color-header: #eac7c7;
+  --color-header-button: #e89c9c;
+  --color-header-light: #eae0da;
+  --color-white: #ffffff;
+
+  --border-radius: 30px;
+}
+
+html {
+  /* default size is 16px, so 62.5 is 10 */
+  font-size: 62.5%;
+  height: 100vh;
+}
+
+body {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  background: rgba(1, 1, 1, 0);
+  min-height: 100%;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* header */
+.header {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  background: linear-gradient(
+    90deg,
+    var(--color-header) 50%,
+    var(--color-header-light) 100%
+  );
+}
+.logo {
+  font-size: 2.5rem;
+  color: var(--color-white);
+  padding-left: 10px;
+}
+
+.toggle-menu {
+  padding-left: 20px;
+}
+
+.button-toggle-menu {
+  color: var(--color-white);
+  background-color: var(--color-header-button);
+  border-radius: 5px;
+  border: 0;
+  height: 30px;
+  width: 30px;
+}
+
+@media screen and (min-width: 1024px) {
+  .toggle-menu {
+    display: none;
+  }
+}
+
+/*  */
