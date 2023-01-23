@@ -11,20 +11,66 @@
       crossorigin="anonymous"
     ></script>
   </head>
-
-  <header class="header">
-    <div class="toggle-menu">
-      <button class="button-toggle-menu" id="button-toggle-menu">
-        <i class="fas fa-bars fa-xl"></i>
-      </button>
-    </div>
-
-    <div class="logo">
-      <p class="logo"><i class="fa-regular fa-circle-check"></i>ToDo List</p>
-    </div>
-  </header>
-
   <body>
+    <header class="header">
+      <div class="toggle-menu">
+        <button class="button-toggle-menu" id="button-toggle-menu">
+          <i class="fas fa-bars fa-xl"></i>
+        </button>
+      </div>
+
+      <div class="logo">
+        <p class="logo"><i class="fa-regular fa-circle-check"></i>ToDo List</p>
+      </div>
+    </header>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-tasks">
+        <div class="sidebar-nav-tasks-header">
+          <h2>Tasks</h2>
+          <div class="plus-button-addtask">
+            <i class="fa-solid fa-plus fa-xl"></i>
+          </div>
+        </div>
+
+        <div class="sidebar-nav-tasks-body">
+          <button class="sidebar-nav-tasks-body-btn selected">
+            <i class="fa-solid fa-calendar-days"></i>All Tasks
+          </button>
+          <button class="sidebar-nav-tasks-body-btn">
+            <i class="fa-solid fa-calendar-day"></i>Today
+          </button>
+          <button class="sidebar-nav-tasks-body-btn">
+            <i class="fa-solid fa-calendar-week"></i>Week
+          </button>
+          <button class="sidebar-nav-tasks-body-btn">
+            <!-- <i class="fa-regular fa-star"></i> -->
+            <i class="fa-solid fa-star staricon"></i>Important
+          </button>
+          <button class="sidebar-nav-tasks-body-btn">
+            <i class="fa-solid fa-calendar-check"></i>Completed
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-nav-projects">
+        <div class="sidebar-nav-projects-header">
+          <h2>Projects</h2>
+          <div class="plus-button-addproject">
+            <i class="fa-solid fa-plus fa-xl"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-nav-projects-body">
+        <button class="sidebar-nav-projects-body-btn">
+          <i class="fa-solid fa-folder-open"></i>General(Default)
+        </button>
+      </div>
+    </nav>
+
+    <main class="main-content"></main>
+
     <script src="main.js"></script>
   </body>
 </html>
