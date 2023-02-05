@@ -1,17 +1,20 @@
 :root {
   --color-primary: #2584ff;
   --color-secondary: #00d9ff;
-  --color-accent: #ff3400;
+
   --color-heading: #1b0760;
-  --color-body: #918ca4;
+
   --color-body-darker: #5c5577;
 
   --color-border: rgb(15, 14, 14);
+  --color-boarder-light: #918ca4;
   --color-header: #eac7c7;
   --color-header-button: #e89c9c;
   --color-header-light: #eae0da;
   --color-sidebar: #f9ede5;
   --color-white: #ffffff;
+  --color-red: #ff3400;
+  --color-lightred: #da5d5d;
 }
 
 /* *,
@@ -77,15 +80,26 @@ p {
   }
 }
 
+.main-content {
+  display: flex;
+  height: 100vh;
+}
+
+.main-display {
+  height: 100vh;
+  width: 824px;
+}
+
 /* Sidebar Nav */
 .sidebar-nav {
   /* display: none; */
   position: fixed;
   overflow: auto;
   height: 100vh;
-  width: 200px;
+  width: 250px;
   background-color: var(--color-sidebar);
   /* transition: transform 250ms; */
+  z-index: 1;
 }
 
 /* .sidebar-nav-tasks {
@@ -102,37 +116,32 @@ p {
 
 .plus-button-addtask,
 .plus-button-addproject {
-  width: 22px;
-  margin: 10px 5px 7px 0;
-  padding-top: 5px;
-  padding-left: 2px;
+  padding-top: 22px;
 
-  border: solid var(--color-border);
-  border-radius: 50%;
-  box-sizing: border-box;
   cursor: pointer;
 }
 .plus-button-addtask:hover,
 .plus-button-addproject:hover {
-  transform: scale(1.2);
-  border: solid var(--color-header);
+  transform: scale(1.5);
+  color: var(--color-header-button);
 }
 
-.sidebar-nav-tasks-body, .sidebar-nav-projects-body {
+.sidebar-nav-tasks-body,
+.sidebar-nav-projects-body {
   display: flex;
   /* justify-content: center; */
   /* align-items: center; */
   flex-direction: column;
 }
-.sidebar-nav-tasks-body-btn, .sidebar-nav-projects-body-btn {
+.sidebar-nav-tasks-body-btn,
+.sidebar-nav-projects-body-btn {
   border: 0;
   background-color: var(--color-sidebar);
   border-radius: 5px;
   cursor: pointer;
   text-align: left;
-  padding: 10px;
+  padding: 10px 0 10px 10px;
   margin-left: 15px;
-  margin-right: 15px;
   font-size: 1.5rem;
 }
 
@@ -143,7 +152,8 @@ p {
   padding-right: 10px;
 }
 
-.sidebar-nav-tasks-body-btn:hover, .sidebar-nav-projects-body-btn:hover {
+.sidebar-nav-tasks-body-btn:hover,
+.sidebar-nav-projects-body-btn:hover {
   background-color: var(--color-header-light);
   border-left: solid 5px var(--color-header);
 }
@@ -153,4 +163,158 @@ p {
 }
 .selected {
   background-color: var(--color-header);
+}
+
+/* sidebar project-icon-group */
+.project-icon-group {
+  float: right;
+}
+.project-edit-icon:hover,
+.project-trash-icon:hover {
+  transform: scale(1.2);
+  color: var(--color-lightred);
+}
+
+/* Dom */
+
+.popup-display {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.popup-container {
+  position: relative;
+  margin: 15% auto;
+  max-width: 400px;
+  border-radius: 10px;
+  padding-bottom: 0px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+
+.forms-header {
+  background: linear-gradient(
+    90deg,
+    var(--color-header) 0%,
+    var(--color-header-light) 100%
+  );
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  text-align: center;
+  font-size: x-large;
+  font-weight: 400;
+  padding: 20px;
+}
+
+.forms-content {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 20px;
+  background-color: var(--color-white);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.forms-content label {
+  font-size: small;
+}
+
+.forms-content input,
+.forms-content textarea,
+.forms-content select {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 5px 0 15px 0;
+  padding: 5px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-boarder-light);
+  border-radius: 3px;
+}
+
+/* priority  */
+
+.task-priority-list {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* invisible radio buttons. the label is used for selection instead */
+input[type="radio"] {
+  /* // this is so the "required" popup still works */
+  /* // it wouldnt show when i tried display: none; */
+  position: relative;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+}
+
+.task-priority-btn {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.task-priority-low {
+  border: 2px solid lime;
+}
+
+#lowpriority:checked + .task-priority-low {
+  background: lime;
+}
+
+.task-priority-medium {
+  border: 2px solid yellow;
+}
+
+#mediumpriority:checked + .task-priority-medium {
+  background: yellow;
+}
+
+.task-priority-high {
+  border: 2px solid red;
+}
+#highpriority:checked + .task-priority-high {
+  background: red;
+}
+
+.task-priority-low:hover,
+.task-priority-medium:hover,
+.task-priority-high:hover {
+  transform: scale(1.2);
+}
+
+/* action buttons */
+.formbutton {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+  border-top: 1px solid var(--color-header-light);
+}
+
+.formbutton-add {
+  background: var(--color-header);
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 5px 15px;
+}
+
+.formbutton-cancel {
+  background: var(--color-white);
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 15px;
+}
+.formbutton-cancel:hover,
+.formbutton-add:hover {
+  color: var(--color-red);
+  transform: scale(1.1);
+}
+
+.hidden {
+  display: none;
 }

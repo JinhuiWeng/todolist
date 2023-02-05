@@ -24,52 +24,187 @@
       </div>
     </header>
 
-    <nav class="sidebar-nav">
-      <div class="sidebar-nav-tasks">
-        <div class="sidebar-nav-tasks-header">
-          <h2>Tasks</h2>
-          <div class="plus-button-addtask">
-            <i class="fa-solid fa-plus fa-xl"></i>
+    <main class="main-content">
+      <nav class="sidebar-nav">
+        <!-- Sidebar Tasks -->
+        <div class="sidebar-nav-tasks">
+          <div class="sidebar-nav-tasks-header">
+            <h2>Tasks</h2>
+            <!-- <div class="plus-button-addtask"> -->
+            <i class="fa-solid fa-plus fa-2xl plus-button-addtask"></i>
+            <!-- </div> -->
+          </div>
+
+          <div class="sidebar-nav-tasks-body">
+            <button class="sidebar-nav-tasks-body-btn selected">
+              <i class="fa-solid fa-calendar-days"></i>All Tasks
+            </button>
+            <button class="sidebar-nav-tasks-body-btn">
+              <i class="fa-solid fa-calendar-day"></i>Today
+            </button>
+            <button class="sidebar-nav-tasks-body-btn">
+              <i class="fa-solid fa-calendar-week"></i>Week
+            </button>
+            <button class="sidebar-nav-tasks-body-btn">
+              <!-- <i class="fa-regular fa-star"></i> -->
+              <i class="fa-solid fa-star staricon"></i>Important
+            </button>
+            <button class="sidebar-nav-tasks-body-btn">
+              <i class="fa-solid fa-calendar-check"></i>Completed
+            </button>
           </div>
         </div>
 
-        <div class="sidebar-nav-tasks-body">
-          <button class="sidebar-nav-tasks-body-btn selected">
-            <i class="fa-solid fa-calendar-days"></i>All Tasks
-          </button>
-          <button class="sidebar-nav-tasks-body-btn">
-            <i class="fa-solid fa-calendar-day"></i>Today
-          </button>
-          <button class="sidebar-nav-tasks-body-btn">
-            <i class="fa-solid fa-calendar-week"></i>Week
-          </button>
-          <button class="sidebar-nav-tasks-body-btn">
-            <!-- <i class="fa-regular fa-star"></i> -->
-            <i class="fa-solid fa-star staricon"></i>Important
-          </button>
-          <button class="sidebar-nav-tasks-body-btn">
-            <i class="fa-solid fa-calendar-check"></i>Completed
-          </button>
-        </div>
-      </div>
-
-      <div class="sidebar-nav-projects">
-        <div class="sidebar-nav-projects-header">
-          <h2>Projects</h2>
-          <div class="plus-button-addproject">
-            <i class="fa-solid fa-plus fa-xl"></i>
+        <!-- Sidebar Projects -->
+        <div class="sidebar-nav-projects">
+          <div class="sidebar-nav-projects-header">
+            <h2>Projects</h2>
+            <i class="fa-solid fa-plus fa-2xl plus-button-addproject"></i>
           </div>
         </div>
-      </div>
 
-      <div class="sidebar-nav-projects-body">
-        <button class="sidebar-nav-projects-body-btn">
-          <i class="fa-solid fa-folder-open"></i>General(Default)
-        </button>
-      </div>
-    </nav>
+        <div
+          class="sidebar-nav-projects-body"
+          id="sidebar-nav-projectlist"
+        ></div>
+      </nav>
 
-    <main class="main-content"></main>
+      <div class="main-display"></div>
+    </main>
+
+    <!-- DOM related -->
+
+    <!-- Page for Popup display -->
+    <div class="popup-display hidden to-close">
+      <div class="popup-container">
+        <!-- project create form -->
+        <form class="addproject-form hidden to-close" name="createProjectForm">
+          <div class="forms-header">Add Project</div>
+
+          <div class="forms-content">
+            <div class="form-project-title">
+              <label class="forms-titles" for="createproject-title"
+                >Title:</label
+              >
+              <input
+                type="text"
+                id="createproject-title"
+                name="createproject-title"
+                required
+              />
+            </div>
+          </div>
+          <div class="formbutton">
+            <button class="formbutton-cancel closetaskform" type="button">
+              Cancel
+            </button>
+            <button
+              class="formbutton-add"
+              id="proejctform-add-btn"
+              type="submit"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+
+        <!-- project edit form -->
+        <form class="editproject-form hidden to-close" name="editProjectForm">
+          <div class="forms-header">Edit Project</div>
+
+          <div class="forms-content">
+            <div class="form-project-title">
+              <label class="forms-titles" for="editproject-title">Title:</label>
+              <input
+                type="text"
+                id="editproject-title"
+                name="editproject-title"
+                required
+              />
+            </div>
+          </div>
+          <div class="formbutton">
+            <button class="formbutton-cancel closetaskform" type="button">
+              Cancel
+            </button>
+            <button
+              class="formbutton-add"
+              id="proejctform-edit-btn"
+              type="submit"
+            >
+              Edit
+            </button>
+          </div>
+        </form>
+
+        <!-- task form -->
+        <form class="addtask-form hidden to-close" name="taskForm">
+          <div class="forms-header">Add Task</div>
+          <div class="forms-content">
+            <div class="form-task-title">
+              <label class="forms-titles" for="task-title">Title:</label>
+              <input type="text" id="task-title" name="task-title" required />
+            </div>
+            <div class="form-task-description">
+              <label for="task-description">Description:</label>
+              <textarea
+                id="task-description"
+                name="task-description"
+                rows="4"
+              ></textarea>
+            </div>
+            <div class="form-task-duedate">
+              <label for="task-duedate">Due Date:</label>
+              <input type="date" id="task-duedate" name="task-duedate" />
+            </div>
+            <div class="form-task-priority">
+              <label>Priority:</label>
+              <div class="task-priority-list">
+                <input
+                  type="radio"
+                  id="lowpriority"
+                  name="prioritylist"
+                  value="low"
+                  checked
+                /><label for="lowpriority" class="task-priority-btn task-priority-low">Low</label>
+
+                <input
+                  type="radio"
+                  id="mediumpriority"
+                  name="prioritylist"
+                  value="medium"
+                />
+                <label for="mediumpriority" class="task-priority-btn task-priority-medium">Medium</label>
+
+                <input
+                type="radio"
+                id="highpriority"
+                name="prioritylist"
+                value="high"
+              />
+              <label for="highpriority" class="task-priority-btn task-priority-high">High</label>
+              </div>
+
+            </div>
+            <div class="form-task-project">
+              <label for="task-project">Project:</label>
+              <select
+                type="text"
+                id="task-projectlist"
+                name="task-projectlist"
+              ></select>
+            </div>
+          </div>
+          <div class="formbutton">
+            <button class="formbutton-cancel closeprojectform" type="button">
+              Cancel
+            </button>
+            <button class="formbutton-add" type="submit">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- end  -->
 
     <script src="main.js"></script>
   </body>
