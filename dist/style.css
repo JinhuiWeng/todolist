@@ -1,11 +1,6 @@
 :root {
-  --color-primary: #2584ff;
-  --color-secondary: #00d9ff;
-  --color-heading: #1b0760;
-  --color-body-darker: #5c5577;
-
   --color-border: rgb(15, 14, 14);
-  --color-boarder-light: #918ca4;
+  --color-border-light: #918ca4;
   --color-header: #eac7c7;
   --color-header-button: #e89c9c;
   --color-header-light: #eae0da;
@@ -13,7 +8,6 @@
   --color-white: #ffffff;
   --color-red: #ff3400;
   --color-lightred: #da5d5d;
-
   --color-taskdiv: #fcedea;
 }
 
@@ -29,7 +23,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100vh;
-  overflow: hidden;
+  /* width: 100%; */
 }
 
 body {
@@ -49,6 +43,7 @@ p {
   display: flex;
   align-items: center;
   height: 70px;
+  width: 100%;
   background: linear-gradient(
     90deg,
     var(--color-header) 50%,
@@ -65,7 +60,7 @@ p {
   padding-left: 20px;
 }
 
-.button-toggle-menu {
+.toggle-menu-button {
   color: var(--color-white);
   background-color: var(--color-header-button);
   border-radius: 5px;
@@ -74,35 +69,26 @@ p {
   width: 30px;
   cursor: pointer;
 }
-.button-toggle-menu:hover {
+.toggle-menu-button:hover {
   transform: scale(1.2);
 }
-@media screen and (min-width: 1024px) {
-  .toggle-menu {
-    display: none;
-  }
-}
 
+/* Sidebar + Task display */
 .main-content {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /* Sidebar Nav */
 .sidebar-nav {
-  /* display: none; */
-
-  overflow: auto;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
   width: 250px;
   background-color: var(--color-sidebar);
   transition: transform 250ms;
-  z-index: 1;
+  z-index: 2;
+  overflow: auto;
 }
-
-/* .sidebar-nav-tasks {
-    
-} */
 
 .sidebar-nav-tasks-header,
 .sidebar-nav-projects-header {
@@ -115,7 +101,6 @@ p {
 .plus-button-addtask,
 .plus-button-addproject {
   padding-top: 22px;
-
   cursor: pointer;
 }
 .plus-button-addtask:hover,
@@ -127,12 +112,9 @@ p {
 .sidebar-nav-tasks-body,
 .sidebar-nav-projects-body {
   display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
   flex-direction: column;
 }
-.sidebar-nav-tasks-body-btn,
-.sidebar-nav-projects-body-btn {
+.sidebar-nav-btns {
   border: 0;
   background-color: var(--color-sidebar);
   border-radius: 5px;
@@ -143,15 +125,11 @@ p {
   font-size: 1.5rem;
 }
 
-.sidebar-nav-tasks-body-btn i {
-  padding-right: 10px;
-}
-.sidebar-nav-projects-body-btn i {
+.sidebar-nav-btns i {
   padding-right: 10px;
 }
 
-.sidebar-nav-tasks-body-btn:hover,
-.sidebar-nav-projects-body-btn:hover {
+.sidebar-nav-btns:hover {
   background-color: var(--color-header-light);
   border-left: solid 5px var(--color-header);
 }
@@ -161,6 +139,14 @@ p {
 }
 .selected {
   background-color: var(--color-header);
+}
+
+/* icon color */
+.fa-solid.fa-star {
+  color: var(--color-red);
+}
+.fa-solid.fa-folder-open {
+  color: #105a67;
 }
 
 /* sidebar project-icon-group */
@@ -177,8 +163,22 @@ p {
 .task-display {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+}
+
+#task-display-header {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: -5px;
+  font-size: medium;
+  font-weight: 600;
+}
+
+.task-display-content {
+  display: flex;
+  flex-direction: column;
   flex-grow: 100;
-  height: 100vh;
   padding: 20px;
   z-index: 1;
 }
@@ -197,7 +197,7 @@ p {
 }
 
 .taskdiv-title {
-  width: 60%;
+  width: 45%;
 }
 
 .task-icon-group i {
@@ -223,18 +223,17 @@ p {
 .task-icon-group i:hover .tooltiptext {
   display: flex;
   position: fixed;
-  background-color: var(--color-body-darker);
-  color: #fff;
+  background-color: var(--color-header-light);
+  color: var(--color-header-button);
   padding: 5px;
   margin: 20px 0 0 -30px;
   border-radius: 6px;
   font-size: x-small;
   letter-spacing: 1.1px;
   text-align: center;
-  
 }
 
-/* Dom */
+/* Dom Popups*/
 
 .popup-display {
   position: fixed;
@@ -252,7 +251,6 @@ p {
   border-radius: 10px;
   padding-bottom: 0px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-
 }
 
 .forms-header {
@@ -290,7 +288,7 @@ p {
   margin: 5px 0 15px 0;
   padding: 5px;
   background-color: var(--color-white);
-  border: 1px solid var(--color-boarder-light);
+  border: 1px solid var(--color-border-light);
   border-radius: 3px;
 }
 
@@ -299,7 +297,7 @@ p {
   display: flex;
   font-size: small;
   padding: 15px 5px;
-  border-bottom: 1px solid var(--color-boarder-light);
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .forms-content-div p:nth-child(1) {
@@ -321,8 +319,6 @@ p {
 
 /* invisible radio buttons. the label is used for selection instead */
 input[type="radio"] {
-  /* // this is so the "required" popup still works */
-  /* // it wouldnt show when i tried display: none; */
   position: relative;
   height: 1px;
   width: 1px;
@@ -383,6 +379,14 @@ input[type="radio"] {
   padding: 5px 15px;
 }
 
+.formbutton-delete {
+  background: var(--color-red);
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 5px 15px;
+}
+
 .formbutton-cancel {
   background: var(--color-white);
   border-radius: 5px;
@@ -394,7 +398,79 @@ input[type="radio"] {
   color: var(--color-red);
   transform: scale(1.1);
 }
+.formbutton-delete:hover {
+  color: var(--color-white);
+  transform: scale(1.1);
+}
 
 .hidden {
   display: none;
-} 
+}
+
+/* disable toggle menu */
+@media screen and (min-width: 924px) {
+  .toggle-menu {
+    display: none;
+  }
+}
+
+/* Ipads and small screens */
+@media screen and (max-width: 924px) {
+  .sidebar-nav {
+    /* display: none; */
+    width: 30%;
+  }
+  .task-display {
+    width: auto;
+  }
+  .task-icon-group i {
+    padding-right: 15px;
+  }
+  .task-icon-group :last-child {
+    padding-right: 0px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 480px) {
+  .sidebar-nav {
+    /* display: none; */
+    width: 45%;
+  }
+  .project-icon-group {
+    padding: 5px 0 0px 0;
+  }
+  .task-display {
+    width: 55%;
+  }
+  .taskdiv {
+    flex-direction: column;
+  }
+  .taskdiv-title {
+    display: flex;
+    justify-content: center;
+    min-width: 100%;
+    padding-bottom: 20px;
+  }
+
+  .taskdiv-duedate {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 20px;
+  }
+
+  .task-icon-group {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-left: 20px;
+  }
+  .popup-container {
+    width: 300px;
+  }
+  .info-task-description {
+    inline-size: 150px;
+    overflow-wrap: break-word;
+  }
+}

@@ -1,20 +1,17 @@
 //load project list
 
-let projectList;
-
-if (localStorage.getItem("projectlist") === null) {
-  projectList = [
-    {
-      projectTitle: "General(Default)",
-      tasks: [],
-    },
-  ];
-} else projectList = JSON.parse(localStorage.getItem("projectlist"));
+let projectList =
+  localStorage.getItem("projectlist") === null
+    ? [
+        {
+          projectTitle: "General(Default)",
+        },
+      ]
+    : JSON.parse(localStorage.getItem("projectlist"));
 
 const createProject = (projectTitle) => {
   return {
     projectTitle,
-    tasks: [],
   };
 };
 
@@ -26,7 +23,6 @@ const addProjectToList = (projectTitle) => {
 
 const editProject = (projectTitle, newProjectTitle) => {
   const projectIndex = findProjectIndex(projectTitle);
-
   projectList[projectIndex].projectTitle = newProjectTitle;
   saveProjectsToLocalStorage();
 };
@@ -37,28 +33,16 @@ const deleteProject = (projectTitle) => {
   saveProjectsToLocalStorage();
 };
 
-const addTaskToProject = (projectTitle, task) => {
-  const projectIndex = findProjectIndex(projectTitle);
-  projectList[projectIndex].tasks.push(task);
-  saveProjectsToLocalStorage();
-};
-
 const findProjectIndex = (projectTitle) => {
-  return projectList.findIndex((p) => p.projectTitle === projectTitle);
+  return projectList.findIndex((p) => p.projectTitle == projectTitle);
 };
 
 const saveProjectsToLocalStorage = () => {
   localStorage.setItem("projectlist", JSON.stringify(projectList));
 };
 
-
-
 const getProjectsFromLocalStorage = () => {
   return JSON.parse(localStorage.getItem("projectlist"));
-};
-
-const logProject = () => {
-  console.log(JSON.parse(localStorage.getItem("projectlist")));
 };
 
 export {
@@ -66,7 +50,5 @@ export {
   addProjectToList,
   editProject,
   deleteProject,
-  addTaskToProject,
   getProjectsFromLocalStorage,
-  logProject,
 };

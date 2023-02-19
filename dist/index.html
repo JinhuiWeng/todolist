@@ -14,7 +14,7 @@
   <body>
     <header class="header">
       <div class="toggle-menu">
-        <button class="button-toggle-menu" id="button-toggle-menu">
+        <button class="toggle-menu-button">
           <i class="fas fa-bars fa-xl"></i>
         </button>
       </div>
@@ -32,25 +32,27 @@
             <div class="sidebar-nav-tasks-header">
               <h2>Tasks</h2>
               <!-- <div class="plus-button-addtask"> -->
-              <i class="fa-solid fa-plus fa-2xl plus-button-addtask"></i>
+              <i
+                class="fa-solid fa-plus fa-2xl clickable-icons plus-button-addtask"
+              ></i>
               <!-- </div> -->
             </div>
 
             <div class="sidebar-nav-tasks-body">
-              <button class="sidebar-nav-tasks-body-btn selected">
+              <button class="sidebar-nav-btns selected" id="all-task-btn">
                 <i class="fa-solid fa-calendar-days"></i>All Tasks
               </button>
-              <button class="sidebar-nav-tasks-body-btn">
+              <button class="sidebar-nav-btns" id="today-task-btn">
                 <i class="fa-solid fa-calendar-day"></i>Today
               </button>
-              <button class="sidebar-nav-tasks-body-btn">
+              <button class="sidebar-nav-btns" id="week-task-btn">
                 <i class="fa-solid fa-calendar-week"></i>Week
               </button>
-              <button class="sidebar-nav-tasks-body-btn">
+              <button class="sidebar-nav-btns" id="important-task-btn">
                 <!-- <i class="fa-regular fa-star"></i> -->
                 <i class="fa-solid fa-star staricon"></i>Important
               </button>
-              <button class="sidebar-nav-tasks-body-btn">
+              <button class="sidebar-nav-btns" id="completed-task-btn">
                 <i class="fa-solid fa-calendar-check"></i>Completed
               </button>
             </div>
@@ -60,7 +62,9 @@
           <div class="sidebar-nav-projects">
             <div class="sidebar-nav-projects-header">
               <h2>Projects</h2>
-              <i class="fa-solid fa-plus fa-2xl plus-button-addproject"></i>
+              <i
+                class="fa-solid fa-plus fa-2xl clickable-icons plus-button-addproject"
+              ></i>
             </div>
           </div>
 
@@ -72,7 +76,10 @@
       </div>
 
       <!-- task display -->
-      <div class="task-display"></div>
+      <div class="task-display">
+        <div id="task-display-header"></div>
+        <div class="task-display-content"></div>
+      </div>
     </main>
 
     <!-- DOM related -->
@@ -98,7 +105,10 @@
             </div>
           </div>
           <div class="formbutton">
-            <button class="formbutton-cancel closetaskform" type="button">
+            <button
+              class="formbutton-cancel clickable-icons closetaskform"
+              type="button"
+            >
               Cancel
             </button>
             <button
@@ -127,7 +137,10 @@
             </div>
           </div>
           <div class="formbutton">
-            <button class="formbutton-cancel closetaskform" type="button">
+            <button
+              class="formbutton-cancel clickable-icons closetaskform"
+              type="button"
+            >
               Cancel
             </button>
             <button
@@ -171,6 +184,7 @@
                 type="date"
                 id="createtask-duedate"
                 name="createtask-duedate"
+                required
               />
             </div>
             <!-- to insert priority -->
@@ -187,7 +201,10 @@
             </div>
           </div>
           <div class="formbutton">
-            <button class="formbutton-cancel closeprojectform" type="button">
+            <button
+              class="formbutton-cancel clickable-icons closeprojectform"
+              type="button"
+            >
               Cancel
             </button>
             <button class="formbutton-add" type="submit">Add</button>
@@ -226,10 +243,11 @@
                 type="date"
                 id="edittask-duedate"
                 name="edittask-duedate"
+                required
               />
             </div>
             <div class="edit-task-priority-insert"></div>
-  
+
             <div class="form-task-project">
               <label for="edittask-projectlist">Project:</label>
               <select
@@ -241,13 +259,60 @@
             </div>
           </div>
           <div class="formbutton">
-            <button class="formbutton-cancel closeprojectform" type="button">
+            <button
+              class="formbutton-cancel clickable-icons closeprojectform"
+              type="button"
+            >
               Cancel
             </button>
             <button class="formbutton-add" type="submit">Edit</button>
           </div>
         </form>
         <!-- edit task form -->
+
+        <!-- Delete Pop up -->
+        <!-- Delete Task Pop up -->
+        <form
+          class="deletetask-form hidden to-close"
+          id="deleteTaskForm"
+          name="deleteTaskForm"
+        >
+          <div class="forms-header">Deleting Task</div>
+          <div class="forms-content">
+            <h2 id="deleteTaskp"></h2>
+          </div>
+          <div class="formbutton">
+            <button
+              class="formbutton-cancel clickable-icons closeprojectform"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button class="formbutton-delete" type="submit">Delete</button>
+          </div>
+        </form>
+
+        <!-- Delete Project Pop up -->
+        <form
+          class="deleteproject-form hidden to-close"
+          id="deleteProjectForm"
+          name="deleteProjectForm"
+        >
+          <div class="forms-header">Deleting Project</div>
+          <div class="forms-content">
+            <h2 id="deleteProjectp"></h2>
+          </div>
+          <div class="formbutton">
+            <button
+              class="formbutton-cancel clickable-icons closeprojectform"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button class="formbutton-delete" type="submit">Delete</button>
+          </div>
+        </form>
+        <!-- Delete Pop up -->
 
         <!-- priority list -->
         <div class="form-task-priority hidden to-close">
@@ -331,7 +396,10 @@
           </div>
 
           <div class="formbutton">
-            <button class="formbutton-cancel closeprojectform" type="button">
+            <button
+              class="formbutton-cancel clickable-icons closeprojectform"
+              type="button"
+            >
               Cancel
             </button>
           </div>

@@ -1,13 +1,10 @@
-let taskList;
-let taskID;
-
-if (localStorage.getItem("tasklist") === null) {
-  taskList = [];
-  taskID = 0;
-} else {
-  taskList = JSON.parse(localStorage.getItem("tasklist"));
-  taskID = taskList[taskList.length - 1].taskID;
-}
+//Load task list
+let taskList =
+  localStorage.getItem("tasklist") !== null
+    ? JSON.parse(localStorage.getItem("tasklist"))
+    : [];
+let startingID =
+  taskList && taskList.length > 0 ? taskList[taskList.length - 1].taskID : 0;
 
 const createTask = (
   taskTitle,
@@ -17,7 +14,7 @@ const createTask = (
   forProject
 ) => {
   return {
-    taskID: ++taskID,
+    taskID: ++startingID,
     taskTitle: taskTitle,
     taskDescription: taskDescription,
     taskDuedate: taskDuedate,
@@ -44,8 +41,6 @@ const addTaskToList = (
   );
   taskList.push(newTask);
   saveTasksToLocalStorage();
-
-  return newTask;
 };
 
 const deleteTask = (selectedTaskID) => {
@@ -54,7 +49,18 @@ const deleteTask = (selectedTaskID) => {
   saveTasksToLocalStorage();
 };
 
-// todo, remove/update task from projec
+const updateProjectToTask = (oldProjectTitle, newProjectTitle) => {
+  taskList.forEach((task) => {
+    if (task.forProject === oldProjectTitle) task.forProject = newProjectTitle;
+  });
+  saveTasksToLocalStorage();
+};
+
+const deleteTasksOnDeletingProject = (projectTitle) => {
+  taskList = taskList.filter((task) => task.forProject !== projectTitle);
+  saveTasksToLocalStorage();
+};
+
 const getSeletedTask = (selectedTaskID) => {
   const taskIndex = findTaskIndex(selectedTaskID);
   return taskList[taskIndex];
@@ -72,14 +78,13 @@ const getTasksFromLocalStorage = () => {
   return JSON.parse(localStorage.getItem("tasklist"));
 };
 
-const logTask = () => {
-  console.log(JSON.parse(localStorage.getItem("tasklist")));
-};
 
 export {
   taskList,
   addTaskToList,
+  deleteTask,
+  updateProjectToTask,
+  deleteTasksOnDeletingProject,
   getSeletedTask,
-  saveTasksToLocalStorage,
-  logTask,
+  saveTasksToLocalStorage
 };

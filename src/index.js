@@ -1,15 +1,9 @@
-import { eventHandlers } from "./eventHandlers";
-import { domPopup, displayProjectsToNav, displayTasks } from "./domHandlers";
-import { getProjectsFromLocalStorage, logProject } from "./project";
-import { logTask } from "./task";
+import { iconClickHandlers, navClickHandlers } from "./eventHandlers";
+import { displayProjectsToNav, displayTasks } from "./domHandlers";
+
 
 displayProjectsToNav();
 displayTasks();
 
-eventHandlers();
-// clickHandlers();
-// createProjectHandler();
-// deleteProjectHandler()
-// localStorage.clear();
-logTask();
-logProject();
+iconClickHandlers();
+navClickHandlers();
