@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="shortcut icon" href="circle-check-regular.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/bdb3c51100.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="toggle-menu">
+        <button class="toggle-menu-button">
+          <i class="fas fa-bars fa-xl"></i>
+        </button>
+      </div>
+
+      <div class="logo">
+        <p class="logo"><i class="fa-regular fa-circle-check"></i>ToDo List</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="sidebar-nav">
+        <nav>
+          <!-- Sidebar Tasks -->
+          <div class="sidebar-nav-tasks">
+            <div class="sidebar-nav-tasks-header">
+              <h2>Tasks</h2>
+              <!-- <div class="plus-button-addtask"> -->
+              <i
+                class="fa-solid fa-plus fa-2xl clickable-icons plus-button-addtask"
+              ></i>
+              <!-- </div> -->
+            </div>
+
+            <div class="sidebar-nav-tasks-body">
+              <button class="sidebar-nav-btns selected" id="all-task-btn">
+                <i class="fa-solid fa-calendar-days"></i>All Tasks
+              </button>
+              <button class="sidebar-nav-btns" id="today-task-btn">
+                <i class="fa-solid fa-calendar-day"></i>Today
+              </button>
+              <button class="sidebar-nav-btns" id="week-task-btn">
+                <i class="fa-solid fa-calendar-week"></i>Week
+              </button>
+              <button class="sidebar-nav-btns" id="important-task-btn">
+                <!-- <i class="fa-regular fa-star"></i> -->
+                <i class="fa-solid fa-star staricon"></i>Important
+              </button>
+              <button class="sidebar-nav-btns" id="completed-task-btn">
+                <i class="fa-solid fa-calendar-check"></i>Completed
+              </button>
+            </div>
+          </div>
+
+          <!-- Sidebar Projects -->
+          <div class="sidebar-nav-projects">
+            <div class="sidebar-nav-projects-header">
+              <h2>Projects</h2>
+              <i
+                class="fa-solid fa-plus fa-2xl clickable-icons plus-button-addproject"
+              ></i>
+            </div>
+          </div>
+
+          <div
+            class="sidebar-nav-projects-body"
+            id="sidebar-nav-projectlist"
+          ></div>
+        </nav>
+      </div>
+
+      <!-- task display -->
+      <div class="task-display">
+        <div id="task-display-header"></div>
+        <div class="task-display-content"></div>
+      </div>
+    </main>
+
+    <!-- DOM related -->
+
+    <!-- Page for Popup display -->
+    <div class="popup-display hidden to-close">
+      <div class="popup-container">
+        <!-- project create form -->
+        <form class="addproject-form hidden to-close" name="createProjectForm">
+          <div class="forms-header">Add Project</div>
+
+          <div class="forms-content">
+            <div class="form-project-title">
+              <label class="forms-titles" for="createproject-title"
+                >Title:</label
+              >
+              <input
+                type="text"
+                id="createproject-title"
+                name="createproject-title"
+                required
+              />
+            </div>
+          </div>
+          <div class="formbutton">
+            <button
+              class="formbutton-cancel clickable-icons closetaskform"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              class="formbutton-add"
+              id="proejctform-add-btn"
+              type="submit"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+
+        <!-- project edit form -->
+        <form class="editproject-form hidden to-close" name="editProjectForm">
+          <div class="forms-header">Edit Project</div>
+
+          <div class="forms-content">
+            <div class="form-project-title">
+              <label class="forms-titles" for="editproject-title">Title:</label>
+              <input
+                type="text"
+                id="editproject-title"
+                name="editproject-title"
+                required
+              />
+            </div>
+          </div>
+          <div class="formbutton">
+            <button
+              class="formbutton-cancel clickable-icons closetaskform"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              class="formbutton-add"
+              id="proejctform-edit-btn"
+              type="submit"
+            >
+              Edit
+            </button>
+          </div>
+        </form>
+
+        <!-- task form -->
+        <form
+          class="addtask-form hidden to-close"
+          id="createTaskForm"
+          name="createTaskForm"
+        >
+          <div class="forms-header">Add Task</div>
+          <div class="forms-content">
+            <div class="form-task-title">
+              <label class="forms-titles" for="createtask-title">Title:</label>
+              <input
+                type="text"
+                id="createtask-title"
+                name="createtask-title"
+                required
+              />
+            </div>
+            <div class="form-task-description">
+              <label for="createtask-description">Description:</label>
+              <textarea
+                id="createtask-description"
+                name="createtask-description"
+                rows="4"
+              ></textarea>
+            </div>
+            <div class="form-task-duedate">
+              <label for="createtask-duedate">Due Date:</label>
+              <input
+                type="date"
+                id="createtask-duedate"
+                name="createtask-duedate"
+                required
+              />
+            </div>
+            <!-- to insert priority -->
+            <div class="create-task-priority-insert"></div>
+
+            <div class="form-task-project">
+              <label for="addtask-projectlist">Project:</label>
+              <select
+                type="text"
+                class="task-projectlist"
+                id="addtask-projectlist"
+                name="addtask-projectlist"
+              ></select>
+            </div>
+          </div>
+          <div class="formbutton">
+            <button
+              class="formbutton-cancel clickable-icons closeprojectform"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button class="formbutton-add" type="submit">Add</button>
+          </div>
+        </form>
+        <!-- task form -->
+
+        <!-- edit task form -->
+        <form
+          class="edittask-form hidden to-close"
+          id="editTaskForm"
+          name="editTaskForm"
+        >
+          <div class="forms-header">Edit Task</div>
+          <div class="forms-content">
+            <div class="form-task-title">
+              <label class="forms-titles" for="edittask-title">Title:</label>
+              <input
+                type="text"
+                id="edittask-title"
+                name="edittask-title"
+                required
+              />
+            </div>
+            <div class="form-task-description">
+              <label for="edittask-description">Description:</label>
+              <textarea
+                id="edittask-description"
+                name="edittask-description"
+                rows="4"
+              ></textarea>
+            </div>
+            <div class="form-task-duedate">
+              <label for="edittask-duedate">Due Date:</label>
+              <input
+                type="date"
+                id="edittask-duedate"
+                name="edittask-duedate"
+                required
+              />
+            </div>
+            <div class="edit-task-priority-insert"></div>
+
+            <div class="form-task-project">
+              <label for="edittask-projectlist">Project:</label>
+              <select
+                type="text"
+                class="task-projectlist"
+                id="edittask-projectlist"
+                name="edittask-projectlist"
+              ></select>
+            </div>
+          </div>
+          <div class="formbutton">
+            <button
+              class="formbutton-cancel clickable-icons closeprojectform"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button class="formbutton-add" type="submit">Edit</button>
+          </div>
+        </form>
+        <!-- edit task form -->
+
+        <!-- Delete Pop up -->
+        <!-- Delete Task Pop up -->
+        <form
+          class="deletetask-form hidden to-close"
+          id="deleteTaskForm"
+          name="deleteTaskForm"
+        >
+          <div class="forms-header">Deleting Task</div>
+          <div class="forms-content">
+            <h2 id="deleteTaskp"></h2>
+          </div>
+          <div class="formbutton">
+            <button
+              class="formbutton-cancel clickable-icons closeprojectform"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button class="formbutton-delete" type="submit">Delete</button>
+          </div>
+        </form>
+
+        <!-- Delete Project Pop up -->
+        <form
+          class="deleteproject-form hidden to-close"
+          id="deleteProjectForm"
+          name="deleteProjectForm"
+        >
+          <div class="forms-header">Deleting Project</div>
+          <div class="forms-content">
+            <h2 id="deleteProjectp"></h2>
+          </div>
+          <div class="formbutton">
+            <button
+              class="formbutton-cancel clickable-icons closeprojectform"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button class="formbutton-delete" type="submit">Delete</button>
+          </div>
+        </form>
+        <!-- Delete Pop up -->
+
+        <!-- priority list -->
+        <div class="form-task-priority hidden to-close">
+          <label>Priority:</label>
+          <div class="task-priority-list">
+            <input
+              type="radio"
+              id="lowpriority"
+              name="prioritylist"
+              value="low"
+              checked
+            /><label
+              for="lowpriority"
+              class="task-priority-btn task-priority-low"
+              >Low</label
+            >
+
+            <input
+              type="radio"
+              id="mediumpriority"
+              name="prioritylist"
+              value="medium"
+            />
+            <label
+              for="mediumpriority"
+              class="task-priority-btn task-priority-medium"
+              >Medium</label
+            >
+
+            <input
+              type="radio"
+              id="highpriority"
+              name="prioritylist"
+              value="high"
+            />
+            <label
+              for="highpriority"
+              class="task-priority-btn task-priority-high"
+              >High</label
+            >
+          </div>
+        </div>
+
+        <!-- TASK INFO CONTENT -->
+        <div class="taskinfo-div hidden to-close">
+          <div class="forms-header">Task Information</div>
+
+          <div class="forms-content">
+            <div class="forms-content-div">
+              <p class="info-id">ID:</p>
+              <p class="info-task-id"></p>
+            </div>
+            <div class="forms-content-div">
+              <p class="info-title">Title:</p>
+              <p class="info-task-title"></p>
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="forms-content-div forms-content-des-div">
+              <p class="info-description">Description:</p>
+              <p class="info-task-description"></p>
+            </div>
+
+            <!-- DUE DATE -->
+            <div class="forms-content-div">
+              <p class="info-due-date">Due date:</p>
+              <p class="info-task-due-date"></p>
+            </div>
+
+            <!-- PRIORITY -->
+            <div class="forms-content-div">
+              <p class="info-priority">Priority:</p>
+              <p class="info-task-priority"></p>
+            </div>
+
+            <!-- PROJECT -->
+            <div class="forms-content-div">
+              <p class="info-project">Project:</p>
+              <p class="info-task-project"></p>
+            </div>
+          </div>
+
+          <div class="formbutton">
+            <button
+              class="formbutton-cancel clickable-icons closeprojectform"
+              type="button"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+        <!-- TASK INFO CONTENT -->
+      </div>
+    </div>
+    <!-- end  -->
+
+    <script src="main.js"></script>
+  </body>
+</html>
