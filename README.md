@@ -20,4 +20,5 @@ A to-do list managament tool with tasks and projects features.
 - Font Awesome Icons
 - date-fns Library
 
-<img width="935" alt="Todo List" src="https://user-images.githubusercontent.com/121464684/219956575-4b953288-c469-4d33-9c91-b92a0b4a709b.png">
+
+![Todo List](https://user-images.githubusercontent.com/121464684/234023620-a9c144d5-5f60-405e-afc1-7b6e6e068a3f.jpeg)
